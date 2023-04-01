@@ -1,0 +1,31 @@
+\section{Algoritmus 1}
+\subsection{Zhrnutie algoritmu}
+Algoritmus je písaný v programovacom jazyku \textit{Python}. Využíva knižnicu \textit{bpy 3.5.0}, ktorá pracuje s \textit{Blender}om. \textit{Blender} je program používaný na modelovanie 3D objektov. Algoritmus sa dá zhrnúť v nasledovných bodoch:
+\begin{enumerate}
+    \item Kontrola, či zadaný reťazec nie je veľkosťou viac ako 2**100
+    \item Vytvorenie kociek
+    \item Výpočet koordinácii jednotlivých bitov na veľkej kocke
+    \item Prevod vstupného reťazca na binárny 
+    \item Vyrezanie jednotlivých bitov
+    \item Zmazanie malej kocky
+    \item Zmena veľkosti veľkej kocky na požadovanú
+\end{enumerate}
+
+
+\subsection{Podrobný popis algoritmu}
+V tejto podsekcií sú popísané jednotlivé body z predchádzajúcej sekcie spolu s útržkami kódu.
+
+\subsubsection{Kontrola, či zadaný reťazec nie je veľkosťou viac ako 2**100}
+V prípade porušenia podmienky algoritmus iba vypíše chybovú hlášku.
+\begin{lstlisting}[language=Python]
+    if (number > 2**100):
+        raise ValueError("Number to encode can't be higher than 2^100.")
+\end{lstlisting}
+
+\subsubsection{Vytvorenie kociek}
+Pri otvorení .blend súboru máme v projekte pridanú predpripravenú kocku so zrezanou hranou. Má zrezanú hranu, pretože 3D tlač nepodporuje tlačenie "do luftu". Preto sme pridali podpery pre kocky ktorými vyrezávame, aby sa identifikátor dal vytlačiť. Predpripravená kocka má uhol zrezania 14°. Ďalej programaticky vytvoríme veľkú a malú kocku. Do veľkej kocky budeme vyrezávať malou kockou a predpripravenou kockou. V podstate by sme programaticky vygenerovanú malú kocku nepotrebovali, ale na vrchu veľkej kocky nemusia byť žiadne podpery, preto vyrezávame celou kockou. \\Vytvorenie kociek: 
+\begin{lstlisting}[language=Python]
+    bpy.ops.mesh.primitive_cube_add(
+        size=12, enter_editmode=False, align='WORLD', location=(0, 0, 0))
+    bpy.context.active_object.name = 'big_cube'
+\end{lstlisting}

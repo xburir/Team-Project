@@ -56,6 +56,7 @@
 \ExecuteOptions{dp}
 \LoadClass[\myset]{\parentclass}
 
+\usepackage{listings}
 \usepackage[overload]{textcase}
 \usepackage[acronym,nopostdot,nogroupskip,nonumberlist]{glossaries}
 
